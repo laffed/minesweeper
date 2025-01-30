@@ -50,8 +50,8 @@ impl Minesweeper {
 impl Display for Minesweeper {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         for row in &self.board {
-            for cell in row {
-                write!(f, "{} ", cell)?; // Print each cell with space separator
+            for tile in row {
+                write!(f, "{} ", tile)?; // Print each cell with space separator
             }
             writeln!(f)?; // Newline after each row
         }
