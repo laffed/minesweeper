@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use std::{cmp, fmt::Display};
 
 fn main() {
@@ -6,20 +8,24 @@ fn main() {
 }
 
 #[derive(Debug)]
-struct Minesweeper {
+pub struct Minesweeper {
     board: Vec<Vec<Tile>>,
+    dim_x: usize,
+    dim_y: usize,
 }
 
 impl Minesweeper {
-    fn new(n: u32, m: u32, mine_count: u32) -> Self {
-        let mut total_tiles = n * m;
+    pub fn new(m: usize, n: usize, mine_count: usize) -> Self {
+        let mut total_tiles = m * n;
         let mut unassigned_mines = cmp::min(mine_count, total_tiles);
 
-        let mut board: Vec<Vec<Tile>> = (0..n).map(|_| vec![Tile::Empty; m as usize]).collect();
+        let mut board: Vec<Vec<Tile>> = (0..m).map(|_| vec![Tile::Empty; n as usize]).collect();
+
+        // insert mines
         for x in board.iter_mut() {
             for y in x.iter_mut() {
                 // resevior sampling probability
-                let is_mine = rand::random_ratio(unassigned_mines, total_tiles);
+                let is_mine = rand::random_ratio(unassigned_mines as u32, total_tiles as u32);
                 if is_mine {
                     *y = Tile::Mine;
                     unassigned_mines -= 1;
@@ -29,7 +35,15 @@ impl Minesweeper {
             }
         }
 
-        Self { board }
+        Self {
+            board,
+            dim_x: n,
+            dim_y: m,
+        }
+    }
+
+    fn get_tile(&self, x: usize, y: usize) -> Option<Tile> {
+        self.board.get(y).and_then(|r| r.get(x).copied())
     }
 }
 
@@ -45,7 +59,7 @@ impl Display for Minesweeper {
     }
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Copy)]
 enum Tile {
     Empty,
     Mine,
