@@ -19,7 +19,7 @@ impl Minesweeper {
         let mut total_tiles = m * n;
         let mut unassigned_mines = cmp::min(mine_count, total_tiles);
 
-        let mut board: Vec<Vec<Tile>> = (0..m).map(|_| vec![Tile::Empty; n as usize]).collect();
+        let mut board: Vec<Vec<Tile>> = (0..m).map(|_| vec![Tile::Empty; n]).collect();
 
         // insert mines
         for x in board.iter_mut() {
