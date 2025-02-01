@@ -25,3 +25,9 @@ cargo build --release
 ```bash
 cargo run
 ```
+
+## TODO
+
+- [ ] add win condition (all non mines uncovered)
+- [ ] unit tests
+- [ ] documentation
