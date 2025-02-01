@@ -6,7 +6,7 @@ A command-line implementation of the classic Minesweeper game, written in Rust.
 
 ### Prerequisites
 
-Ensure that you have [Rust](https://www.rust-lang.org/learn/get-started) installed on your machine. You can verify the installation by running the following command in your terminal:
+Ensure that you have [Rust](https://www.rust-lang.org/learn/get-started) installed on your machine 
 
 ### Clone the Repository
 
